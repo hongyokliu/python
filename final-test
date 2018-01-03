@@ -9,13 +9,16 @@ try:
     request = urllib2.Request(url,headers = headers)
     response = urllib2.urlopen(request)
     content = response.read().decode('gbk')
-    pattern = re.compile('<span>.*?<a target="_blank" .*?title="(.*?)"',re.S)
-    money = re.compile('<span class="t4">(.*?) </span>',re.S)
+    pattern = re.compile('<span>.*?title="(.*?)".*?>',re.S)
+    company = re.compile('<a.*?title="(.*?)".*?</span>',re.S)
+    place = re.compile('<span class "t3">(.*?)</span>',re.S)
     items = re.findall(pattern,content)
-    items2 = re.findall(money,content)
+    items2 = re.findall(company,content)
+    items3 = re.findall(place,content)
     for i in range(1, len(items)-1):
         print items[i]
         print items2[i]
+        print items3[i]
 #haveImg = re.search("img",item[3])
 #if not haveImg:
 #print item[0],item[1],item[2],item[4]
@@ -24,3 +27,12 @@ except urllib2.URLError, e:
         print e.code
     if hasattr(e,"reason"):
         print e.reason
+
+
+#    input = raw_input()
+#   if input =="":
+#        print "nextpage:"
+#        continue
+#    elif input =="Q":
+#        break
+
